@@ -1,10 +1,30 @@
 const Contact = require('../models/Contact');
+const sendEmail = require('../utils/sendEmail');
 
 exports.create = async (req, res) => {
   try {
-    const contact = new Contact(req.body);
+    const { name, email, message } = req.body;
+
+    // Save to DB
+    const contact = new Contact({ name, email, message });
     await contact.save();
-    res.status(201).json(contact);
+
+    // Send email notification
+    const html = `
+      <h2>New Contact Form Message</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
+    `;
+
+    await sendEmail(
+      'qmhrsanya@gmail.com', // Replace with actual church email
+      'New Contact Message - QMHR Parish',
+      html
+    );
+
+    res.status(201).json({ message: 'Message submitted and email sent', contact });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -12,7 +32,7 @@ exports.create = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   try {
-    const contacts = await Contact.find();
+    const contacts = await Contact.find().sort({ createdAt: -1 });
     res.json(contacts);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -6,6 +6,8 @@ require('dotenv').config();
 const membershipRoutes = require('./routes/membershipRoutes');
 const familyRoutes = require('./routes/familyRoutes'); // ✅ Import family routes
 const authRoutes = require('./routes/authRoutes');
+const contactRoutes = require('./routes/contactRoutes');
+
 
 const app = express();
 
@@ -24,6 +26,8 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/memberships', membershipRoutes);
 app.use('/api/families', familyRoutes); // ✅ Mount family routes
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
+
 
 
 
