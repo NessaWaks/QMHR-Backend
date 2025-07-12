@@ -11,12 +11,17 @@ const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 
 // ✅ Enable CORS for development + production frontend domains
+const allowedOrigins = [
+  'http://localhost:5173',                  // for local dev
+  'https://qmhr-parish.onrender.com'        // your deployed frontend
+];
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://qmhr-catholic-church-x6pc.onrender.com',   // ← Replace with your real Render frontend domain
-    // 'https://yourdomain.com'                // ← Replace with your custom domain if you have one
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 
