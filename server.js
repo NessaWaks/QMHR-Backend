@@ -14,8 +14,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://your-frontend.onrender.com',   // ← Replace with your real Render frontend domain
-    'https://yourdomain.com'                // ← Replace with your custom domain if you have one
+    'https://qmhr-catholic-church-x6pc.onrender.com',   // ← Replace with your real Render frontend domain
+    // 'https://yourdomain.com'                // ← Replace with your custom domain if you have one
   ],
   credentials: true,
 }));
