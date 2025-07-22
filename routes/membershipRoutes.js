@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const membershipCtrl = require('../controllers/membershipController');
-const { verifyToken } = require('../middleware/auth');
 
+// No more token verification here
 router.post('/register', membershipCtrl.register);
 router.post('/login', membershipCtrl.login);
 
-router.get('/', verifyToken, membershipCtrl.getAll);
-router.get('/:id', verifyToken, membershipCtrl.getOne);
-router.put('/:id', verifyToken, membershipCtrl.update);
-router.delete('/:id', verifyToken, membershipCtrl.delete);
+// Open admin routes
+router.get('/', membershipCtrl.getAll);
+router.get('/:id', membershipCtrl.getOne);
+router.put('/:id', membershipCtrl.update);
+router.delete('/:id', membershipCtrl.delete);
 
 module.exports = router;

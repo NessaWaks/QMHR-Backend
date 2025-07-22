@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const familyCtrl = require('../controllers/familyController');
-const { verifyToken } = require('../middleware/auth');
 
+// No more token verification here
 router.post('/register', familyCtrl.register);
 router.post('/login', familyCtrl.login);
 
-router.get('/', verifyToken, familyCtrl.getAll);
-router.get('/:id', verifyToken, familyCtrl.getOne);
-router.put('/:id', verifyToken, familyCtrl.update);
-router.delete('/:id', verifyToken, familyCtrl.delete);
+// Open admin routes
+router.get('/', familyCtrl.getAll);
+router.get('/:id', familyCtrl.getOne);
+router.put('/:id', familyCtrl.update);
+router.delete('/:id', familyCtrl.delete);
 
 module.exports = router;

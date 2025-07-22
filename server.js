@@ -7,13 +7,14 @@ const membershipRoutes = require('./routes/membershipRoutes');
 const familyRoutes = require('./routes/familyRoutes');
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const adminRoutes = require('./routes/adminRoutes'); // ✅ Moved up here
 
 const app = express();
 
 // ✅ Enable CORS for development + production frontend domains
 const allowedOrigins = [
-  'http://localhost:5173',                  // for local dev
-  'https://qmhr-parish.onrender.com'        // your deployed frontend
+  'http://localhost:5173',
+  'https://qmhr-parish.onrender.com'
 ];
 app.use(cors({
   origin: (origin, callback) => {
@@ -38,6 +39,7 @@ app.use('/api/memberships', membershipRoutes);
 app.use('/api/families', familyRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api', adminRoutes); // ✅ Just once and simplified to /api/verify-key
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
