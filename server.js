@@ -14,8 +14,10 @@ const app = express();
 // ✅ Enable CORS for development + production frontend domains
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://qmhr-parish.onrender.com'
+  'https://qmhr-parish.onrender.com', 
+  'https://qmhr-catholic-church-x6pc.onrender.com' 
 ];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -25,6 +27,7 @@ app.use(cors({
   },
   credentials: true,
 }));
+
 
 // ✅ Parse incoming JSON
 app.use(express.json());
