@@ -7,7 +7,7 @@ const membershipRoutes = require('./routes/membershipRoutes');
 const familyRoutes = require('./routes/familyRoutes');
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
-const adminRoutes = require('./routes/adminRoutes'); // ✅ Moved up here
+const adminRoutes = require('./routes/adminRoutes'); 
 
 const app = express();
 
